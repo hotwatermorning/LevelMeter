@@ -204,7 +204,7 @@ public:
     :   rms_level_(0)
     ,   controller_(controller)
     {
-        integration_time_ = std::make_unique<SliderWithTitle>("RMS Window Time(ms)", 1, 2000, 1000);
+        integration_time_ = std::make_unique<SliderWithTitle>("Integration Time(ms)", 1, 2000, 1000);
         integration_time_->SetCallback([this](int value) { controller_->RMSMeter_SetIntegrationTime(value); });
         
         adjust_input_level_ = std::make_unique<SliderWithTitle>("Adjust Input Level(dB * 10^-3)", -12000, 12000, 0);
