@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="Ea74cU" name="LevelMeter" projectType="guiapp" version="1.0.0"
+              bundleIdentifier="com.yourcompany.LevelMeter" includeBinaryInAppConfig="1"
+              jucerVersion="3.2.0">
+  <MAINGROUP id="P1kOHF" name="LevelMeter">
+    <GROUP id="{6091449D-F5B1-B436-BE1C-C26FD8B25EAE}" name="Source">
+      <FILE id="HXc89S" name="MovingAverageValue.hpp" compile="0" resource="0"
+            file="Source/MovingAverageValue.hpp"/>
+      <FILE id="FbCRH1" name="PeakHoldValue.hpp" compile="0" resource="0"
+            file="Source/PeakHoldValue.hpp"/>
+      <FILE id="DAw3f9" name="ZeroIterator.hpp" compile="0" resource="0"
+            file="Source/ZeroIterator.hpp"/>
+      <FILE id="kMhPzf" name="FFTMeter.hpp" compile="0" resource="0" file="Source/FFTMeter.hpp"/>
+      <FILE id="MluaJj" name="Linear_dB.hpp" compile="0" resource="0" file="Source/Linear_dB.hpp"/>
+      <FILE id="ewwczG" name="ILevelMeter.hpp" compile="0" resource="0" file="Source/ILevelMeter.hpp"/>
+      <FILE id="AbhRgF" name="RMSMeter.hpp" compile="0" resource="0" file="Source/RMSMeter.hpp"/>
+      <FILE id="o5Ytcf" name="PeakMeter.hpp" compile="0" resource="0" file="Source/PeakMeter.hpp"/>
+      <FILE id="Ny75EE" name="MainComponent.cpp" compile="1" resource="0"
+            file="Source/MainComponent.cpp"/>
+      <FILE id="LYkiT0" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+    </GROUP>
+  </MAINGROUP>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" osxSDK="default" osxCompatibility="10.10 SDK" osxArchitecture="default"
+                       isDebug="1" optimisation="1" targetName="LevelMeter" customXcodeFlags="CLANG_CXX_LANGUAGE_STANDARD = &quot;c++14&quot;"
+                       headerPath="/usr/local/include"/>
+        <CONFIGURATION name="Release" osxSDK="default" osxCompatibility="10.10 SDK"
+                       osxArchitecture="default" isDebug="0" optimisation="3" targetName="LevelMeter"
+                       customXcodeFlags="CLANG_CXX_LANGUAGE_STANDARD = &quot;c++14&quot;"
+                       headerPath="/usr/local/include"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="/opt/JUCE-OSX/modules"/>
+        <MODULEPATH id="juce_events" path="/opt/JUCE-OSX/modules"/>
+        <MODULEPATH id="juce_graphics" path="/opt/JUCE-OSX/modules"/>
+        <MODULEPATH id="juce_data_structures" path="/opt/JUCE-OSX/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="/opt/JUCE-OSX/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="/opt/JUCE-OSX/modules"/>
+        <MODULEPATH id="juce_cryptography" path="/opt/JUCE-OSX/modules"/>
+        <MODULEPATH id="juce_video" path="/opt/JUCE-OSX/modules"/>
+        <MODULEPATH id="juce_opengl" path="/opt/JUCE-OSX/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="/opt/JUCE-OSX/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="/opt/JUCE-OSX/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="/opt/JUCE-OSX/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="/opt/JUCE-OSX/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="/opt/JUCE-OSX/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULES id="juce_audio_basics" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_audio_devices" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_audio_formats" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_audio_processors" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_audio_utils" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_core" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_cryptography" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_data_structures" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_events" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_graphics" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_gui_basics" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_gui_extra" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_opengl" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_video" showAllCode="1" useLocalCopy="1"/>
+  </MODULES>
+  <JUCEOPTIONS JUCE_USE_OGGVORBIS="enabled" JUCE_USE_MP3AUDIOFORMAT="enabled"
+               JUCE_USE_LAME_AUDIO_FORMAT="enabled"/>
+</JUCERPROJECT>

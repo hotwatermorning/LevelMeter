@@ -1,0 +1,11 @@
+*/
+!Source/
+
+*.*
+!*.md
+!*.txt
+!*.cpp
+!*.h
+!*.hpp
+!.gitignore
+!*.jucer
