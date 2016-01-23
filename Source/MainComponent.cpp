@@ -508,6 +508,9 @@ public:
         
         file_path_display_.setColour(juce::Label::outlineColourId, juce::Colours::white);
         file_path_display_.setColour(juce::Label::textColourId, juce::Colours::white);
+        auto &laf = file_path_display_.getLookAndFeel();
+        laf.setDefaultSansSerifTypefaceName("Hiragino Kaku Gothic Pro");
+        file_path_display_.sendLookAndFeelChange();
         
         file_loading_button_.setButtonText("Load File");
         
@@ -545,6 +548,11 @@ public:
                                               browser,
                                               false,
                                               Colours::lightgrey);
+        
+        auto &laf_browser = browser.getLookAndFeel();
+        laf_browser.setDefaultSansSerifTypefaceName("Hiragino Kaku Gothic Pro");
+        browser.sendLookAndFeelChange();
+
         if (!dialogBox.show()) {
             return;
         }
