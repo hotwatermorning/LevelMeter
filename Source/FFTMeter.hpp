@@ -69,7 +69,7 @@ struct FFTMeter
     
     void SetFFTOrder(int order)
     {
-        fft_ = std::make_unique<juce::FFT>(order, false);
+        fft_ = std::make_unique<juce::dsp::FFT>(order);
         
         assert(order >= 6); // 64サンプル以上
  
@@ -168,7 +168,7 @@ private:
     void doSetSample(RandomAccessIterator begin, RandomAccessIterator end)
     {
         for(auto it = begin; it != end; ++it) {
-            juce::FFT::Complex c = { (float)(*it), 0.0 };
+            juce::dsp::Complex<float> c = { (float)(*it), 0.0 };
             fft_work_.push_back(c);
             if(fft_work_.size() == GetSize()) {
                 
@@ -176,20 +176,20 @@ private:
                 double const freq_step = sampling_rate_ / (double)GetSize();
                 
                 //! 虚数部分のデータには0を埋める
-                static juce::FFT::Complex const zero = { 0.0, 0.0 };
+                static juce::dsp::Complex<float> const zero = { 0.0, 0.0 };
                 std::fill(fft_output_.begin(), fft_output_.end(), zero);
 
                 //! windowing
                 for(int i = 0; i < GetSize(); ++i) {
-                    fft_work_[i].r *= window_[i];
+                    fft_work_[i].real(fft_work_[i].real() * window_[i]);
                 }
                 
                 //! FFT実行
-                fft_->perform(fft_work_.data(), fft_output_.data());
+                fft_->perform(fft_work_.data(), fft_output_.data(), false);
                 
                 for(int i = 0; i < GetSize() / 2; ++i) {
                     //! スペクトルの絶対値を計算
-                    auto point_abs = juce_hypot(fft_output_[i].r, fft_output_[i].i);
+                    auto point_abs = juce_hypot(fft_output_[i].real(), fft_output_[i].imag());
                     
                     //! FFTの次数や窓関数によるパワー値のズレを補正
                     float power = point_abs / (power_scaling * freq_step * enbw_correction_factor_);
@@ -217,9 +217,9 @@ private:
 
     int sampling_rate_;
     int order_;
-    std::unique_ptr<juce::FFT> fft_;
-    std::vector<juce::FFT::Complex> fft_work_;
-    std::vector<juce::FFT::Complex> fft_output_;
+    std::unique_ptr<juce::dsp::FFT> fft_;
+    std::vector<juce::dsp::Complex<float>> fft_work_;
+    std::vector<juce::dsp::Complex<float>> fft_output_;
     
     std::vector<float> window_;
     double amplitude_correction_factor_;

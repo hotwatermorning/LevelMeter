@@ -107,7 +107,7 @@ public:
     ,   peak_hold_level_(std::numeric_limits<dB_t>::lowest())
     ,   controller_(controller)
     {
-        peak_hold_time_ = std::make_unique<SliderWithTitle>("Peak Hold Time(ms)", 0, 2000, 1000);
+        peak_hold_time_ = std::make_unique<SliderWithTitle>("Peak Hold Time(ms)", 0, 2000, 300);
         average_num_ = std::make_unique<SliderWithTitle>("Average Num", 1, 500, 1);
         
         peak_hold_time_->SetCallback([this](int value) { controller_->PeakMeter_SetPeakHoldTime(value); });
@@ -204,7 +204,7 @@ public:
     :   rms_level_(0)
     ,   controller_(controller)
     {
-        integration_time_ = std::make_unique<SliderWithTitle>("Integration Time(ms)", 1, 2000, 1000);
+        integration_time_ = std::make_unique<SliderWithTitle>("RMS Window Time(ms)", 1, 2000, 300);
         integration_time_->SetCallback([this](int value) { controller_->RMSMeter_SetIntegrationTime(value); });
         
         adjust_input_level_ = std::make_unique<SliderWithTitle>("Adjust Input Level(dB * 10^-3)", -12000, 12000, 0);
@@ -473,7 +473,7 @@ class MainContentComponent
 ,   public IPeakMeterController
 ,   public IRMSMeterController
 ,   public IFFTMeterController
-,   public juce::ButtonListener
+,   public juce::Button::Listener
 {
 public:
     //==============================================================================
@@ -532,7 +532,7 @@ public:
     
     void LoadFile()
     {
-        juce::WildcardFileFilter wildcardFilter ("*.wav;*.aiff;*.mp3;*.mp4;*.m4a", String::empty, "Audio Files");
+        juce::WildcardFileFilter wildcardFilter ("*.wav;*.aiff;*.mp3;*.mp4;*.m4a", String{}, "Audio Files");
         
         auto const flags =
         juce::FileBrowserComponent::FileChooserFlags::canSelectFiles |
