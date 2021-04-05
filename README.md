@@ -6,6 +6,8 @@ LevelMeter
 [Event for Diverse Game Engineers](http://edge.connpass.com/event/20910/)
 でのLTで使用したプログラムです。
 
+<img width="912" alt="スクリーンショット 2021-04-05 16 03 06" src="https://user-images.githubusercontent.com/359226/113549975-44638680-962d-11eb-9363-705586bc9c10.png">
+
 オーディオ用レベルメーターの実装として、
 
  * Peak Programme Meter
