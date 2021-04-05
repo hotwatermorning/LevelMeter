@@ -13,7 +13,7 @@
 
 #include <cassert>
 #include <atomic>
-#include <boost/circular_buffer.hpp>
+#include "./SimpleRingBuffer.hpp"
 #include "./Linear_dB.hpp"
 #include "./ILevelMeter.hpp"
 #include "./ZeroIterator.hpp"
@@ -28,7 +28,7 @@ private:
     size_t     sampling_rate_;
     double     square_sum_;
     size_t     integration_time_;
-    boost::circular_buffer<double>     integration_;
+    SimpleRingBuffer<double>     integration_;
 
 public:
     RMSMeter(size_t sampling_rate, millisec integration_time)
@@ -46,7 +46,7 @@ public:
      */
     double	GetRMS			() const
     {
-        return sqrt(square_sum_ / (double)integration_.capacity());
+        return sqrt(square_sum_ / (double)integration_.ssize());
     }
     
     //! RMS値を計測するための時間幅
@@ -56,9 +56,8 @@ public:
     void	SetSamplingRate	(size_t sampling_rate)
     {
         sampling_rate_ = sampling_rate;
-        integration_.set_capacity(sampling_rate * integration_time_ / 10); // 400ms
-        integration_.resize(integration_.capacity());
-        std::fill(integration_.begin(), integration_.end(), 0.0);
+        integration_.resize(sampling_rate * integration_time_ / 10); // 400ms
+        integration_.fill(0.0);
         square_sum_ = 0;
         
         SetIntegrationTime(integration_time_);
@@ -69,9 +68,8 @@ public:
     void SetIntegrationTime(millisec integration_time)
     {
         integration_time_ = integration_time;
-        integration_.set_capacity(sampling_rate_ * integration_time_ / 1000); // 400ms
-        integration_.resize(integration_.capacity());
-        std::fill(integration_.begin(), integration_.end(), 0.0);
+        integration_.resize(sampling_rate_ * integration_time_ / 1000); // 400ms
+        integration_.fill(0.0);
         square_sum_ = 0;
     }
     
@@ -99,14 +97,10 @@ private:
     void	doSetSamples	(InputIterator begin, InputIterator end)
     {
         for(InputIterator it = begin; it != end; ++it) {
-            double const oldest = integration_.front();
             double const newest = (*it * *it);
+            double const oldest = integration_.push_and_pop(newest);
 
-            square_sum_ -= oldest;
-
-            integration_.pop_front();
-            integration_.push_back(newest);
-            
+            square_sum_ -= oldest;            
             square_sum_ += newest;
         }
         

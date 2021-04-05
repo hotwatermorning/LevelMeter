@@ -76,7 +76,7 @@ struct FFTMeter
         fft_work_.clear();
         fft_output_.clear();
         fft_work_.reserve(pow(2, order));
-        fft_output_.reserve(pow(2, order));
+        fft_output_.resize(pow(2, order));
         
         window_.resize(pow(2, order));
         
@@ -86,7 +86,7 @@ struct FFTMeter
             
             //! hanning window
             for(int i = 0; i < window_.size(); ++i) {
-                window_[i] = 0.5 - 0.5 * cos(2 * M_PI * i / (window_.size() - 1));
+                window_[i] = 0.5 - 0.5 * cos(2 * juce::MathConstants<double>::pi * i / (window_.size() - 1));
             }
             
             double amplitude_correction_factor = 0;

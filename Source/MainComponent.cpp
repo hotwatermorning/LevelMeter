@@ -239,7 +239,7 @@ private:
             angle = angle_max;
         }
 
-        return angle / 180 * M_PI;
+        return angle / 180 * juce::MathConstants<double>::pi;
     }
     
     void paint(juce::Graphics &g) override
